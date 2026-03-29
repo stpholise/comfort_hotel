@@ -1,11 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Pacifico, Josefin_Sans, Courgette } from "next/font/google";
 import "./globals.css";
+import Header from "./_components/layout/Header";
+import Footer from "./_components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+
+const pacifico = Pacifico({
+  weight: "400",
+  variable: "--font-pacifico",
+  subsets: ["latin"],
+})
+
+const josefinSans = Josefin_Sans({
+  weight: "400",
+  variable: "--font-josephine",
+  subsets: ['latin']
+})
+
+const courgette = Courgette({
+  weight: "400",
+  variable: "--font-courgette",
+  subsets: ['latin']
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -25,9 +45,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} ${josefinSans.variable} ${courgette.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-gray-200">
+      <Header />
+      {children}
+      <Footer />
+      </body>
     </html>
   );
 }
