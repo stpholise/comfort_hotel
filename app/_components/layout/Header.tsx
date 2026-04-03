@@ -1,12 +1,27 @@
 'use client'
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useState, useEffect } from 'react'
 
 const Header = () => {
   const param = useParams()
+
+  const [ isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll);
+ return () => window.removeEventListener("scroll", handleScroll);
+  }, [])
+ 
   return (
-    <div className="px-4 sticky top-0 bg-black/10 ">
+    <div className={clsx("px-4 sticky mx-auto z-10 w-full ", 
+      isScrolled ? "bg-black/90 top-4 max-w-6xl w-full rounded-lg text-gray-200 ": "bg-black/10 top-0 text-black"
+    )}>
       <div className="max-w-6xl mx-auto py-2 px-4  flex items-center justify-between h-20  overflow-hidden">
         <div className="">
           <Image
@@ -33,7 +48,7 @@ const Header = () => {
   );
 };
 
-const navItems = [
+ export const navItems : {url: string, value: string}[] = [
   {
     url: "/",
     value: "Home",
