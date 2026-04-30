@@ -11,7 +11,7 @@ const page = () => {
       <div className=" pt-18 pb-12">
         <div className="flex justify-between px-4 xl:gap-22  w-full  max-w-6xl mx-auto">
           <div className="">
-            <div className="h-110 w-90 bg-amber-950 relative">
+            <div className="h-110 w-90 bg-amber-950 relative mb-8">
               <Image
                 src={'/bg_images/img1.jpeg'}
                 alt="ceo image"
@@ -21,7 +21,7 @@ const page = () => {
                />
             </div>
 
-            <div className="xl font-semi-bold">
+            <div className="xl font-semi-bold text-center font-semibold">
               Anonymous Name (Manager)
             </div>
           </div>

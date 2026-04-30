@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useState, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 const Page = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -25,12 +27,13 @@ const Page = () => {
 
         <div className="absolute inset-0 bg-black/30"></div>
         {!isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center z-20">
+          <div className="absolute inset-0 flex items-center justify-center z-10">
             <button
               onClick={handlePlay}
-              className="bg-white/20 backdrop-blur-md p-6 rounded-full hover:scale-110 transition"
+              className="bg-white/20 backdrop-blur-md p-6 rounded-full hover:scale-110 transition flex items-center justify-center z-2"
             >
-              ▶
+              
+              <FontAwesomeIcon icon={faPlay} className="text-xl" />
             </button>
           </div>
         )}

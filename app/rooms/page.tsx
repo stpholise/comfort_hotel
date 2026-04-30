@@ -11,7 +11,7 @@ const page = () => {
 
       <div className="max-w-6xl gap-6 mx-auto grid grid-cols-3 mt-18 mb-8">
         {rooms.map((room, i) => (
-          <div key={i} className=" bg-gray-300 shadow-xl rounded-sm">
+          <div key={i} className=" bg-gray-200 shadow-sm rounded">
             <div className="">
 
             </div>

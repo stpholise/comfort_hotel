@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Carousel from "react-multi-carousel";
+import dynamic from "next/dynamic";
 import "react-multi-carousel/lib/styles.css";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
+const BookingBar = dynamic(() => import("../_components/layout/BookingBar"), {
+  ssr: false,
+});
 import {
   faWifi,
   faPersonSwimming,
@@ -16,12 +19,9 @@ import {
   faQuoteLeft,
   faQuoteRight,
   faStar,
-  faCalendar,
-  faLocation,
-  faUser,
-  faBed
-  
 } from "@fortawesome/free-solid-svg-icons";
+
+const Carousel = dynamic(() => import("react-multi-carousel"), { ssr: false });
 
 const responsiveness = {
   desktop: {
@@ -48,19 +48,19 @@ const responsiveness = {
   },
 };
 
-const page = () => {
+const Page = () => {
   return (
     <div className="flex flex-col gap-8 lg:gap-12 lg:mb-12">
-      <div className=" bg-black/10 h-[calc(100vh-80px)] w-full relative">
+      <div className=" bg-black/10 h-[calc(100vh-80px)] w-full relative ">
         <div className=" lg:grid grid-cols-2 max-w-6xl  mx-auto h-full ">
-          <div className=" flex flex-col justify-center gap-4 h-11/12">
+          <div className=" sm:absolute inset-0 sm:bg-black/20 lg:bg-transparent lg:static flex flex-col justify-center lg:items-start items-center gap-4 h-full lg:h-11/12  z-12">
             <h2 className="font-pacifico text-5xl italic font-semibold">
               Comfort Hotel
             </h2>
             <h3 className="font-courgette text-4xl italic font-medium text-amber-600">
               Hotel for every moment rich in emotion
             </h3>
-            <p className="text-sm font-medium">
+            <p className="text-sm font-medium lg:text-black sm:text-gray-200">
               Every moment feels like the first time in paradise view
             </p>
             <div className=" flex item-center mt-8  justify-between max-w-xs">
@@ -68,7 +68,7 @@ const page = () => {
                 Book now
               </button>
 
-              <button className="play flex gap-2 text-slate-700 font-semibold items-center">
+              <button className="play flex gap-2 sm:text-gray-200 lg:text-slate-700 font-semibold items-center">
                 <FontAwesomeIcon
                   icon={faCirclePlay}
                   className="size-12 text-4xl  text-green-700 "
@@ -77,18 +77,18 @@ const page = () => {
               </button>
             </div>
           </div>
-          <div className="">
+          <div className=" lg:static sm:absolute inset-0 -z-1">
             <Image
               src="/bg_images/img1.jpeg"
               alt="bg-image"
-              width="800"
-              height="700"
-              className="h-full"
+              width={800}
+              height={700}
+              className="h-full w-full object-cover"
             />
           </div>
         </div>
-        <div className="absolute bottom-8 left-0 right-0  h-20 max-w-7xl mx-auto bg-white rounded-2xl flex ">
-            
+        <div className="absolute bottom-8 left-0 right-0  h-20 max-w-7xl mx-auto  px-3 rounded-2xl flex ">
+          <BookingBar />
         </div>
       </div>
       <div className=" max-w-6xl mx-auto py-8 flex-col flex gap-4">
@@ -148,57 +148,62 @@ const page = () => {
       </div>
       <div className="testimonies">
         <h2 className=" text-center text-4xl py-8">Tesimonials</h2>
-        <Carousel
-          responsive={responsiveness}
-          swipeable
-          autoPlay
-          autoPlaySpeed={4000}
-          infinite
-          transitionDuration={500}
-          containerClass="w-full max-w-6xl mx-auto  "
-          itemClass="px-3 "
-        >
-          {testimonials.map((item, index) => (
-            <div
-              key={index}
-              className="border bg-gray-100 border-gray-200 bg-accent rounded-2xl shadow-md p-6 h-full flex flex-col  gap-4 justify-between transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
-            >
-              <div className="flex justify-between items-center">
-                <p className=" text-xs">{item.date}</p>
-                <div className="">
-                    {
-                        [...Array(item.star)].map((_, i) =>(
-                            <FontAwesomeIcon key={i} icon={faStar} className="text-amber-500  text-xs" />
-                        ))
-                    }
+        <div className="">
+          <Carousel
+            responsive={responsiveness}
+            swipeable
+            autoPlay
+            autoPlaySpeed={4000}
+            infinite
+            transitionDuration={500}
+            containerClass="w-full max-w-6xl mx-auto  "
+            itemClass="px-3 "
+          >
+            {testimonials.map((item, index) => (
+              <div
+                key={index}
+                className="border bg-gray-100 border-gray-200 bg-accent rounded-2xl shadow-md p-6 h-full flex flex-col  gap-4 justify-between transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
+              >
+                <div className="flex justify-between items-center">
+                  <p className=" text-xs">{item.date}</p>
+                  <div className="">
+                    {[...Array(item.star)].map((_, i) => (
+                      <FontAwesomeIcon
+                        key={i}
+                        icon={faStar}
+                        className="text-amber-500  text-xs"
+                      />
+                    ))}
+                  </div>
                 </div>
 
+                <div className="text-gray-600 text-sm leading-relaxed">
+                  <FontAwesomeIcon
+                    icon={faQuoteLeft}
+                    className="size-6  sm:size-12 mb-1 text-slate-700"
+                  />
+                  {item.text}
+                  <FontAwesomeIcon
+                    icon={faQuoteRight}
+                    className="size-8 sm:size-12  mb-1 text-slate-700"
+                  />
+                </div>
+                <div className="flex items-center gap-4 ">
+                  <Image
+                    src={item.image}
+                    alt={"client"}
+                    className="w-8 h-8 rounded-full object-cover"
+                    width={40}
+                    height={40}
+                  />
+                  <h4 className="text-sm font-semibold text-gray-700">
+                    {item.name}
+                  </h4>
+                </div>
               </div>
-
-              <div className="text-gray-600 text-sm leading-relaxed">
-                <FontAwesomeIcon
-                  icon={faQuoteLeft}
-                  className="size-6  sm:size-12 mb-1 text-slate-700"
-                />
-                {item.text}
-                <FontAwesomeIcon
-                  icon={faQuoteRight}
-                  className="size-8 sm:size-12  mb-1 text-slate-700"
-                />
-              </div>
-              <div className="flex items-center gap-4 ">
-                <Image
-                  src={item.image}
-                  alt={"client"}
-                  className="w-8 h-8 rounded-full object-cover"
-                  width={40}
-                  height={40}
-                />
-                <h4 className="text-sm font-semibold text-gray-700">{item.name}</h4>
-              </div>
-            </div>
-          ))}
-        </Carousel>
+            ))}
+          </Carousel>
+        </div>
       </div>
     </div>
   );
@@ -258,35 +263,41 @@ const roomStandards = [
   },
 ];
 
-const testimonials: { star: number, date:string, name: string; text: string; image: string }[] = [
+const testimonials: {
+  star: number;
+  date: string;
+  name: string;
+  text: string;
+  image: string;
+}[] = [
   {
-     date:"2 Mar, 2023",
+    date: "2 Mar, 2023",
     name: "Chinedu A.",
     text: "Abrss made the entire process so easy and stress-free. From finding the right property to closing the deal, everything was smooth and transparent.",
     image: "/bg_images/img2.jpeg",
-    star:4
+    star: 4,
   },
   {
-     date:"2 Mar, 2023",
+    date: "2 Mar, 2023",
     name: "Amina S.",
     text: "Professional, reliable, and truly caring. They listened to my needs and helped me find exactly what I wanted.",
     image: "/bg_images/img2.jpeg",
     star: 4,
   },
   {
-     date:"2 Mar, 2023",
+    date: "2 Mar, 2023",
     name: "David O.",
     text: "The best real estate experience I’ve ever had. Abrss helped me secure a great investment property quickly.",
     image: "/bg_images/img2.jpeg",
-    star:5,
+    star: 5,
   },
   {
-    date:"2 Mar, 2023",
+    date: "2 Mar, 2023",
     name: "Grace E.",
     text: "Highly recommend Abrss. Their attention to detail and commitment to excellence is unmatched.",
     image: "/bg_images/img2.jpeg",
-    star:5,
+    star: 5,
   },
 ];
 
-export default page;
+export default Page;

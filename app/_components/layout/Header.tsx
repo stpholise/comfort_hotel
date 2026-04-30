@@ -2,11 +2,10 @@
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-const Header = () => {
-  const param = useParams();
+const Header = () => { 
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -21,14 +20,14 @@ const Header = () => {
   return (
     <div
       className={clsx(
-        "px-4 sticky mx-auto z-10 w-full ",
+        "px-4 sticky mx-auto z-20 w-full ",
         isScrolled
           ? "bg-black/98 top-4 max-w-6xl w-full rounded-lg text-gray-200 "
           : "bg-black/10 top-0 text-black",
       )}
     >
       <div className="max-w-6xl mx-auto py-2 px-4  flex items-center justify-between h-20  overflow-hidden">
-        <div className="">
+        <Link href={'/'} className="">
           <Image
             src={"/logo.png"}
             height={200}
@@ -36,7 +35,7 @@ const Header = () => {
             alt="logo"
             className="w-22 h-10"
           />
-        </div>
+        </Link>
         <div className=" flex gap-8 whitespace-nowrap text-sm font-semibold">
           {navItems.map((item, i) => (
             <Link href={item.url} key={i}>

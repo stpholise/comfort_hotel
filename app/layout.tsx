@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Pacifico, Josefin_Sans, Courgette } from "next/font/
 import "./globals.css";
 import Header from "./_components/layout/Header";
 import Footer from "./_components/layout/Footer";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,7 @@ export default function RootLayout({
       <Header />
       {children}
       <Footer />
+      <Toaster />
       </body>
     </html>
   );
