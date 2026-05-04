@@ -17,6 +17,12 @@
   --font-courgette : "Courgette", cursive;
 }
 
+.react-multiple-carousel__arrow {
+  z-index: 0 !important;
+  background: #0a1f44 !important ;
+  opacity: 0.8 !important;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
