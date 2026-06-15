@@ -41,20 +41,20 @@ const Page = () => {
 
       <div className="">
         <h2 className="text-3xl font-bold text-center py-14"> Take a tour</h2>
-        <div className="">
+        <div className="px-2">
           {tour.map((item, i) => (
             <div
               key={i}
-              className="max-w-6xl h-100 mb-26 rounded-3xl  mx-auto relative "
+              className="max-w-6xl h-100 mb-30 sm:mb-26 rounded-3xl  mx-auto relative "
             >
               <Image
                 src={item.img}
                 alt="bg"
                 width={600}
                 height={400}
-                className="absolute inset-0 w-full h-full object-cover rounded-3xl "
+                className="sm:absolute inset-0 w-full h-full object-cover rounded-3xl "
               />
-              <div className=" w-xl h-40 rounded-2xl  shadow-xl  absolute -bottom-3/9 left-1/2 transform -translate-1/2 py-3 px-3 bg-white ">
+              <div className=" w-full sm:w-xl h-40 sm:rounded-2xl  shadow-xl  absolute -bottom-3/9 left-1/2 transform -translate-1/2 py-3 px-3 bg-white ">
                 <h3 className="text-center font-semibold text-lg py-3 text-slate-700">
                   {item.title}
                 </h3>

@@ -54,7 +54,7 @@ const Page = () => {
       <div className=" bg-black/10 h-[calc(100vh-80px)] w-full relative ">
         <div className=" p-4 lg:grid grid-cols-2 max-w-6xl  mx-auto h-full ">
           <div className=" sm:absolute inset-0 sm:bg-black/20 lg:bg-transparent lg:static flex flex-col justify-center lg:items-start items-center gap-4 h-full lg:h-11/12  z-12">
-            <h2 className="font-pacifico text-5xl italic font-semibold">
+            <h2 className="font-pacifico sm:text-start text-center text-5xl italic font-semibold">
               Comfort Hotel
             </h2>
             <h3 className="font-courgette text-4xl italic font-medium text-amber-600 text-center sm:text-start">
@@ -87,7 +87,7 @@ const Page = () => {
             />
           </div>
         </div>
-      
+
         <div className=" hidden sm:absolute bottom-8 left-0 right-0 z-10 h-20 max-w-7xl mx-auto  px-3 rounded-2xl sm:flex ">
           <BookingBar />
         </div>
