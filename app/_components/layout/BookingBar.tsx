@@ -26,6 +26,7 @@ export default function BookingBar() {
   };
 
   const handleSubmit = async () => {
+    console.log('testing button')
     try {
       const res = await fetch("/api/availability", {
         method: "POST",
@@ -48,10 +49,10 @@ export default function BookingBar() {
 
   return (
     <div className="w-full bg-white/90 backdrop-blur-md shadow-xl  rounded-2xl p-4 md:p-5 flex items-center gap-8">
-      <div className="flex flex-col md:flex-row gap-4 items-center  flex-8 ">
-        {/* 📍 Location */}
+      <div className="flex flex-row h-fit bg-white p-4 lg:p-0 flex-wrap lg:flex-nowrap md:flex-row gap-4 items-center  flex-8 ">
+        
         <div className=" flex  gap-2 flex-1 ">
-          <FontAwesomeIcon icon={faLocation} className="py-1 text-xl  md:hidden sm:flex flex" />
+          <FontAwesomeIcon icon={faLocation} className="py-1 text-xl  lg:hidden sm:flex flex" />
           <div className="flex flex-col w-full ">
             <label className="text-sm text-gray-500 ">Location</label>
 

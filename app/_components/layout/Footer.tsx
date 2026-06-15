@@ -12,7 +12,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="bg-slate-700 py-8 min-h-80 mt-12 flex-col flex text-gray-400">
-      <div className="max-w-6xl p-4 mx-auto flex items-start  w-full justify-between gap-12">
+      <div className="max-w-6xl p-4 mx-auto flex flex-col sm:flex-row items-start  w-full justify-between gap-12">
         <div className="  max-w-70 flex flex-col gap-8">
           <h2 className="font-pacifico text-3xl italic font-semibold">
             Comfort Hotel

@@ -52,18 +52,18 @@ const Page = () => {
   return (
     <div className="flex flex-col gap-8 lg:gap-12 lg:mb-12">
       <div className=" bg-black/10 h-[calc(100vh-80px)] w-full relative ">
-        <div className=" lg:grid grid-cols-2 max-w-6xl  mx-auto h-full ">
+        <div className=" p-4 lg:grid grid-cols-2 max-w-6xl  mx-auto h-full ">
           <div className=" sm:absolute inset-0 sm:bg-black/20 lg:bg-transparent lg:static flex flex-col justify-center lg:items-start items-center gap-4 h-full lg:h-11/12  z-12">
             <h2 className="font-pacifico text-5xl italic font-semibold">
               Comfort Hotel
             </h2>
-            <h3 className="font-courgette text-4xl italic font-medium text-amber-600">
+            <h3 className="font-courgette text-4xl italic font-medium text-amber-600 text-center sm:text-start">
               Hotel for every moment rich in emotion
             </h3>
             <p className="text-sm font-medium lg:text-black sm:text-gray-200">
               Every moment feels like the first time in paradise view
             </p>
-            <div className=" flex item-center mt-8  justify-between max-w-xs">
+            <div className=" flex item-center mt-8 gap-4  justify-between max-w-xs">
               <button className=" w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium">
                 Book now
               </button>
@@ -77,7 +77,7 @@ const Page = () => {
               </button>
             </div>
           </div>
-          <div className=" lg:static sm:absolute inset-0 -z-1">
+          <div className="hidden sm:block lg:static sm:absolute inset-0 sm:z-1 -z-1">
             <Image
               src="/bg_images/img1.jpeg"
               alt="bg-image"
@@ -87,7 +87,8 @@ const Page = () => {
             />
           </div>
         </div>
-        <div className="absolute bottom-8 left-0 right-0  h-20 max-w-7xl mx-auto  px-3 rounded-2xl flex ">
+      
+        <div className=" hidden sm:absolute bottom-8 left-0 right-0 z-10 h-20 max-w-7xl mx-auto  px-3 rounded-2xl sm:flex ">
           <BookingBar />
         </div>
       </div>
@@ -98,10 +99,10 @@ const Page = () => {
         <p className="text-center">
           We offer mordern (5 star) hotel facilities for your comfort.
         </p>
-        <div className=" flex justify-center gap-4 flex-wrap mx-auto max-w-5xl py-4">
+        <div className=" px-2 flex justify-center gap-4 flex-wrap mx-auto max-w-5xl py-4">
           {facilities.map((item, i) => (
             <div
-              className="h-45 w-55 bg-gray-200 border-gray-200 border rounded-lg p-4 flex flex-col  items-center justify-center gap-3"
+              className="sm:h-45 sm:w-55 bg-gray-200 border-gray-200 border rounded-lg p-5  sm:p-4 flex flex-col  items-center justify-center gap-3"
               key={i}
             >
               <FontAwesomeIcon
@@ -113,8 +114,8 @@ const Page = () => {
           ))}
         </div>
       </div>
-      <div className="max-w-6xl mx-auto bg-[url('/bg_images/img3.jpeg')]  relative bg-cover bg-center h-110 w-full">
-        <div className="absolute inset-0 bg-black/40 py-8 px-6 flex flex-col gap-3">
+      <div className="max-w-6xl mx-auto bg-[url('/bg_images/img3.jpeg')]  relative bg-cover bg-center sm:h-110 w-full">
+        <div className=" static sm:absolute inset-0 bg-black/40 py-8 px-6 flex flex-col gap-3">
           <h2 className="font-josefin text-4xl font-medium text-white text-center">
             Luxury Rooms
           </h2>
@@ -122,10 +123,10 @@ const Page = () => {
             All rooms are designed for comfort.
           </p>
 
-          <div className="grid grid-cols-3  max-w-5xl mx-auto gap-4 justify-center py-4">
+          <div className=" flex-wrap sm:flex-nowrap flex max-w-5xl mx-auto gap-4 justify-center py-4">
             {roomStandards.map((item, i) => (
               <div
-                className="flex-1 rounded-lg  px-4 pt-4 pb-2 bg-white overflow-hidden"
+                className="flex-1 rounded-lg  px-4 pt-4 pb-2 bg-white overflow-hidden min-w-70"
                 key={i}
               >
                 <div className="relative">
