@@ -1,9 +1,38 @@
-import React from 'react'
+import Hero from "../_components/layout/Hero";
 
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <Hero
+        heading="Contact us"
+        text="The elegant luxury bedrooms in this gallery showcase custom interior designs & decorating ideas. View pictures and find your perfect luxury bedroom design."
+      />
 
-export default page
+      <div className=" max-w-5xl px-4 py-8 mx-auto">
+        <form>
+          <div className="  grid grid-cols-2  gap-4  flex-wrap">
+            <div className="w-1/2 ">
+              <label htmlFor="">Full name</label>
+              <input type="text" className=""/>
+            </div>
+            <div className=" w-1/2 ">
+              <label htmlFor="">Email</label>
+              <input type="text" />
+            </div>
+            <div className="w-1/2 flex-1">
+              <label htmlFor="">Phone</label>
+              <input type="text" />
+            </div>
+          </div>
+            <div className="w-full mt-4">
+              <label htmlFor="">Message</label>
+              <input type="text"  className=""/>
+            </div>
+        </form>
+      </div>
+      <div className=""> map</div>
+    </div>
+  );
+};
+
+export default page;

@@ -1,10 +1,42 @@
+"use client";
 import Image from "next/image";
+import { useState, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
-const page = () => {
+const Page = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlay = () => {
+    videoRef.current?.play();
+    setIsPlaying(true);
+  };
   return (
     <div>
-      <div className="head relative w-full h-[calc(100%-100px)]">
-        <video className="absolute inset-0" />
+      <div className="head relative w-full h-[calc(100vh-80px)] bg-gray-300">
+        <video
+          ref={videoRef}
+          loop
+          muted
+          playsInline
+          className="absolute  top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
+
+        <div className="absolute inset-0 bg-black/30"></div>
+        {!isPlaying && (
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <button
+              onClick={handlePlay}
+              className="bg-white/20 backdrop-blur-md p-6 rounded-full hover:scale-110 transition flex items-center justify-center z-2"
+            >
+              
+              <FontAwesomeIcon icon={faPlay} className="text-xl" />
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="">
@@ -46,7 +78,7 @@ const tour = [
   },
   {
     img: "/bg_images/img2.jpeg",
-    title: "Luxry rooms",
+    title: "Gym",
     text: "The elegant luxury bedrooms in this gallery showcase custom interior designs & decorating ideas. View pictures and find your perfect luxury bedroom design.Luxurious bedrooms that will make you never want to leave your room again. See more ideas about luxurious bedrooms, bedroom design",
   },
   {
@@ -56,4 +88,4 @@ const tour = [
   },
 ];
 
-export default page;
+export default Page;
