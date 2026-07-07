@@ -9,7 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [displayMenu, setDisplayMenu] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,8 +21,8 @@ const Header = () => {
   }, []);
 
   const toggelMenu = () => {
-    console.log('testing ')
-  }
+    console.log("testing ");
+  };
 
   return (
     <div
@@ -55,13 +56,13 @@ const Header = () => {
               </Link>
             ))}
           </div>
-          <button onClick={toggelMenu}  className="sm:hidden">
+          <button onClick={() => setDisplayMenu(true)} className="sm:hidden">
             {" "}
             <FontAwesomeIcon
               icon={faBars}
               className={clsx(
                 " text-3xl text-slate-700",
-                isScrolled ? "text-white" : " text-slate-800"
+                isScrolled ? "text-white" : " text-slate-800",
               )}
             />
           </button>
