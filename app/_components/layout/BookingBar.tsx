@@ -43,8 +43,7 @@ export default function BookingBar() {
         console.log(err.message);
       }
     }
-
-    // 👉 show available rooms to user
+ 
   };
 
   return (
