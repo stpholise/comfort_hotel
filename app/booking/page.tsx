@@ -9,7 +9,7 @@ import RoomCard from "./components/RoomCard";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import RoomDetailsModal from "./components/RoomDetailsModal";
-
+import BookingModal from "../_components/layout/BookingModal";
 
 export interface Room {
   id: string;
@@ -37,6 +37,7 @@ const Page = () => {
   const [displayRoom, setDisplayRoom] = useState<Room | undefined>(undefined);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const totalPrice = 10;
+  const [openBookingModal, setOpenBookingModal] = useState<boolean>(false)
 
   const onViewDetails = (roomId: string) => {
     const currentRoom = rooms.find((room) => room.id === roomId);
@@ -67,7 +68,7 @@ const Page = () => {
         </div>
         <div className="">
           <div className="steps bg-black text-gray-700">
-            <div className="container text-sm max-w-5xl mx-auto flex gap-12 py-2">
+            <div className="container text-sm max-w-5xl mx-auto flex px-4 gap-12 py-2">
               <div className=" text-white ">
                 <span className="border px-2 py-1">1</span>
                 <span> Room selection</span>
@@ -85,7 +86,7 @@ const Page = () => {
           <BookingBar />
         </div>
       </div>
-      <div className="main-two-col max-w-5xl mx-auto container py-8">
+      <div className="main-two-col max-w-5xl mx-auto container px-4 py-8">
         <div className="action-heading py-4  ">
           <h2 className="text-4xl font-[extralight] text-gray-500">
             Choose you room
@@ -106,7 +107,7 @@ const Page = () => {
             </span>
           </div>
         </div>
-        <div className="two-col flex gap-12">
+        <div className="two-col flex sm:flex-row flex-col gap-8 xl:gap-12">
           <div className="left-side-with-image-and-select-button-and-room-info flex flex-col gap-8">
             {/* select button should open a modal form with a message part for proper explenation of room need */}
             {rooms.map((room, i) => (
@@ -116,14 +117,24 @@ const Page = () => {
             ))}
           </div>
           <div className="rigth-side">
-            <div className="border-gray-400 border h-90 w-60 sticky top-40">
-              <div className="">Selected rooms: </div>
-              <div className="">Total: {totalPrice}</div>
-              <button className="Submit"></button>
+            <div className=" py-8 sm:h-90 w-60 sticky top-40 flex flex-col justify-end mx-auto">
+              <div className="bg-slate-100 border border-gray-200 border-dotted h-24 p-2">
+            <span className="text-gray-300 text-lg font-extralight"> Selected rooms:{" "}</span>    
+              </div>
+              <div className="flex my-2 h-13 items-center justify-between border-y border-gray-200 p-2">
+                <span className="text-2xl">Total</span>{" "}
+                <span>{totalPrice} </span>{" "}
+              </div>
+              <button onClick={()=> setOpenBookingModal(true)} className="w-full h-12 bg-slate-700 rounded-xs text-white font-extralight text-lg">
+                Submit
+              </button>
             </div>
           </div>
         </div>
       </div>
+      {
+        openBookingModal && <BookingModal isOpen={openBookingModal} setOpenBookingModal={setOpenBookingModal} />
+      }
       {openModal && displayRoom && (
         <RoomDetailsModal setOpenModal={setOpenModal} room={displayRoom} />
       )}

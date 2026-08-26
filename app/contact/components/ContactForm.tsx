@@ -75,9 +75,9 @@ const ContactForm = () => {
         validationSchema={messageSchima}
         initialValues={formValues}
       >
-        <Form className="flex-col flex gap-4">
-          <div className="flex items-center justify-between  gap-6">
-            <div className="flex-col gap-2 flex  w-1/2 ">
+        <Form className="flex-col px-4 flex gap-4">
+          <div className="flex sm:flex-row flex-col w-full items-center justify-between  gap-6">
+            <div className="flex-col gap-2 flex w-full sm:w-1/2 ">
               <label htmlFor="" className="">
                 Full name
               </label>
@@ -93,7 +93,7 @@ const ContactForm = () => {
                 className=" text-xs text-red-500"
               />
             </div>
-            <div className="flex-col gap-2 flex  w-1/2">
+            <div className="flex-col gap-2 flex w-full sm:w-1/2">
               <label htmlFor="">Email</label>
               <Field
                 type="email"
@@ -114,7 +114,7 @@ const ContactForm = () => {
               as="textarea"
               name="message"
               placeholder="message"
-              className="border-gray-400 outline-none h-70  border rounded-sm text-base px-2 py-1"
+              className="border-gray-400 outline-none h-40 lg:h-70  border rounded-sm text-base px-2 py-1"
             />
             <ErrorMessage
               name="fullName"

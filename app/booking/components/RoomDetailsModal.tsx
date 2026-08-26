@@ -32,16 +32,16 @@ const RoomDetailsModal = ({ setOpenModal, room }: RoomDetailsModalProps) => {
     }
   };
   return (
-    <div className="w-screen h-screen fixed left-0 right-0 bottom-0 top-0 bg-black z-80 ">
+    <div className="w-screen min-h-screen sm:h-screen fixed inset-0 overflow-y-auto bg-black z-80 ">
       <button
         className="absolute top-4 right-6 "
         onClick={() => setOpenModal(false)}
       >
-        <FontAwesomeIcon icon={faClose} className="ltext-base g:text-2xl text-white" />
+        <FontAwesomeIcon icon={faClose} className="text-base g:text-2xl text-white" />
       </button>
-      <div className="container  max-w-5xl mx-auto py-8 px-6 flex justify-center gap-8">
-        <div className="sticky top-10 ">
-          <div className="w-120 h-120  relative">
+      <div className="container  max-w-5xl mx-auto py-8 sm:px-6 px-3 flex-col sm:flex-row flex justify-center gap-8">
+        <div className="sm:sticky top-10 ">
+          <div className="w-full sm:w-120 h-120  relative">
             <Image
               src={room.images[currentImage]}
               alt={"room"}

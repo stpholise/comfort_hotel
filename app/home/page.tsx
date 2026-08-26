@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dynamic from "next/dynamic";
 import "react-multi-carousel/lib/styles.css";
+import Link from "next/link";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 const BookingBar = dynamic(() => import("../_components/layout/BookingBar"), {
   ssr: false,
@@ -64,9 +65,9 @@ const Page = () => {
               Every moment feels like the first time in paradise view
             </p>
             <div className=" flex item-center mt-8 gap-4  justify-between max-w-xs">
-              <button className=" w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium">
+              <Link href={'booking'} className=" w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium">
                 Book now
-              </button>
+              </Link>
 
               <button className="play flex gap-2 sm:text-gray-200 lg:text-slate-700 font-semibold items-center">
                 <FontAwesomeIcon
@@ -88,7 +89,7 @@ const Page = () => {
           </div>
         </div>
 
-        <div className=" hidden sm:absolute bottom-8 left-0 right-0 z-10 h-20 max-w-7xl mx-auto  px-3 rounded-2xl sm:flex ">
+        <div className=" hidden sm:absolute bottom-8 left-0 right-0 z-20 xl:z-10 xl:h-20  max-w-7xl mx-auto  px-0 xl:px-3 rounded-2xl sm:flex ">
           <BookingBar />
         </div>
       </div>
@@ -123,10 +124,10 @@ const Page = () => {
             All rooms are designed for comfort.
           </p>
 
-          <div className=" flex-wrap sm:flex-nowrap flex max-w-5xl mx-auto gap-4 justify-center py-4">
+          <div className=" flex-wrap sm:flex-nowrap flex sm:flex-row flex-col max-w-5xl mx-auto gap-4 justify-center py-4">
             {roomStandards.map((item, i) => (
               <div
-                className="flex-1 rounded-lg  px-4 pt-4 pb-2 bg-white overflow-hidden min-w-70"
+                className="flex-1 rounded-lg  px-4 pt-4 pb-2 bg-white overflow-hidden lg:min-w-70"
                 key={i}
               >
                 <div className="relative">

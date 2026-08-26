@@ -26,15 +26,14 @@ export default function BookingBar() {
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  
+
   const handleLink = {
-    pathname:"/booking",
-    query:{
-      roomType:form.roomType,
-      guest:String(form.guests)
-    }
-  }
-  
+    pathname: "/booking",
+    query: {
+      roomType: form.roomType,
+      guest: String(form.guests),
+    },
+  };
 
   // const handleSubmit = async () => {
   //   console.log("testing button");
@@ -57,7 +56,7 @@ export default function BookingBar() {
   // };
 
   return (
-    <div className="w-full bg-white/90 backdrop-blur-md shadow-xl  rounded-2xl p-4 md:p-5 flex items-center gap-8">
+    <div className="w-full hidden bg-white/80 backdrop-blur-md shadow-xl  rounded-2xl p-4 md:p-5 sm:flex items-center gap-8">
       <div className="flex flex-row h-fit bg-white p-4 lg:p-0 flex-wrap lg:flex-nowrap md:flex-row gap-4 items-center  flex-8 ">
         <div className=" flex  gap-2 flex-1 ">
           <FontAwesomeIcon
@@ -125,7 +124,10 @@ export default function BookingBar() {
             >
               {[1, 2, 3, 4, 5].map((num) => (
                 <option key={num} value={num}>
-                  {num} {num === 1 ? "Person" : "People"}
+                  {num}{" "}
+                  <span className="hidden xl:inline">
+                    {num === 1 ? "Person" : "People"}
+                  </span>
                 </option>
               ))}
             </select>
@@ -174,7 +176,6 @@ export default function BookingBar() {
           href={handleLink}
           className="w-full md:w-auto px-6 py-2 h-10 bg-slate-600 text-white rounded-xl hover:bg-blue-700 transition text-sm funt-medium whitespace-nowrap"
         >
-          
           Book Now
         </Link>
       </div>

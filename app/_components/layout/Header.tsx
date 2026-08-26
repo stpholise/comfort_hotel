@@ -1,15 +1,13 @@
 "use client";
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
-// import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import BookingModal from "./BookingModal";
+import Link from "next/link"; 
+import { useState, useEffect } from "react"; 
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [displayMenu, setDisplayMenu] = useState<boolean>(false);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
+ 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,14 +130,11 @@ const Header = () => {
             />
           </button>
 
-          <button onClick={() =>setIsBookingOpen(true)} className="sm:block hidden w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium whitespace-nowrap">
+          <Link href={'/booking'}  className="sm:block hidden w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium whitespace-nowrap">
             Book now
-          </button>
+          </Link>
         </div>
-        <BookingModal
-          isOpen={isBookingOpen}
-          onClose={() => setIsBookingOpen(false)}
-        />
+       
       </div>
     </div>
   );

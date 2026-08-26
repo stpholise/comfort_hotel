@@ -7,13 +7,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 import Hero from "../_components/layout/Hero";
+import Link from "next/link";
 
 const page = () => {
   return (
     <div>
       <Hero  arrowDown={true} />
 
-      <div className="max-w-6xl px-4 gap-8 sm:gap-6 flex flex-col  mx-auto md:grid md:grid-cols-3 mt-18 mb-8">
+      <div className="max-w-6xl px-4 gap-8 sm:gap-6 flex flex-col  mx-auto md:grid  md:grid-cols-2 lg:grid-cols-3 mt-18 mb-8">
         {rooms.map((room, i) => (
           <div key={i} className=" bg-gray-200 shadow-sm rounded">
             <div className=""></div>
@@ -68,10 +69,10 @@ const page = () => {
                     />
                   </div>
                 </div>
-                <button className="text-gray-300 bg-slate-700 px-6 py-1 h-10 font-semibold">
+                <Link href={'/booking'} className="text-gray-300 rounded bg-slate-700 px-4 xl:px-6 py-1 h-10 font-semibold flex items-center">
                   {" "}
                   Book now
-                </button>
+                </Link>
               </div>
             </div>
           </div>
