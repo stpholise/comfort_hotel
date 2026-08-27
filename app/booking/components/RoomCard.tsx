@@ -11,7 +11,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import RoomDetailsModal from "./RoomDetailsModal";
+import clsx from "clsx";
 
 export interface RoomCardProps {
   room: {
@@ -34,13 +34,19 @@ export interface RoomCardProps {
   };
   onBook?: (roomId: string) => void;
   onViewDetails?: (roomId: string) => void;
+  onSelectRoom: (roomId: string) => void;
+  isSelected: boolean;
 }
 
-const RoomCard = ({ room, onBook, onViewDetails }: RoomCardProps) => {
- 
+const RoomCard = ({
+  room,
+  onSelectRoom,
+  onViewDetails,
+  isSelected,
+}: RoomCardProps) => {
   const [currentImage, setCurrentImage] = useState<number>(0);
 
-   const handleImageChange = (direction: "next" | "previous") => {
+  const handleImageChange = (direction: "next" | "previous") => {
     if (direction === "next") {
       setCurrentImage((current) =>
         current === room.images.length - 1 ? 0 : current + 1,
@@ -54,9 +60,6 @@ const RoomCard = ({ room, onBook, onViewDetails }: RoomCardProps) => {
   return (
     <article className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg">
       <div className="relative h-56 w-full overflow-hidden">
-        {/* <div className="py-3 w-full h-12">
-          <h3 className="">{room.name}</h3>
-        </div> */}
         <Image
           src={room.images[currentImage]}
           alt={"room"}
@@ -133,9 +136,7 @@ const RoomCard = ({ room, onBook, onViewDetails }: RoomCardProps) => {
           )}
         </div>
 
-        {/* Bottom section */}
         <div className="flex items-end justify-between gap-4 border-t border-gray-100 pt-4">
-          {/* Non-negotiables */}
           <div>
             <p className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-400">
               Included
@@ -157,7 +158,6 @@ const RoomCard = ({ room, onBook, onViewDetails }: RoomCardProps) => {
             </div>
           </div>
 
-          {/* Price + button */}
           <div className="text-right">
             <p className="text-xs text-gray-400">From</p>
 
@@ -171,15 +171,17 @@ const RoomCard = ({ room, onBook, onViewDetails }: RoomCardProps) => {
 
             <button
               type="button"
-              onClick={() => onBook?.(room.id)}
-              className="mt-2 rounded-lg bg-slate-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+              onClick={() => onSelectRoom(room.id)}
+              className={clsx(
+                "mt-2 rounded-lg  px-4 py-2 text-sm font-medium text-white transition ",
+                isSelected ? "bg-red-500 hover:bg-red-700" : "bg-slate-700 hover:bg-blue-700",
+              )}
             >
-              Select room
+              {isSelected ? "Remove Room" : "Select Room"}
             </button>
           </div>
         </div>
       </div>
-      {/* {openModal && <RoomDetailsModal setOpenModal={setOpenModal} room={room}/>} */}
     </article>
   );
 };

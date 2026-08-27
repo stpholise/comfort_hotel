@@ -65,17 +65,23 @@ const Page = () => {
               Every moment feels like the first time in paradise view
             </p>
             <div className=" flex item-center mt-8 gap-4  justify-between max-w-xs">
-              <Link href={'booking'} className=" w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium">
+              <Link
+                href={"booking"}
+                className=" w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium"
+              >
                 Book now
               </Link>
 
-              <button className="play flex gap-2 sm:text-gray-200 lg:text-slate-700 font-semibold items-center">
+              <Link
+                href={"/explore"}
+                className="play flex gap-2 sm:text-gray-200 lg:text-slate-700 font-semibold items-center"
+              >
                 <FontAwesomeIcon
                   icon={faCirclePlay}
                   className="size-12 text-4xl  text-green-700 "
                 />{" "}
                 Take a tour
-              </button>
+              </Link>
             </div>
           </div>
           <div className="hidden sm:block lg:static sm:absolute inset-0 sm:z-1 -z-1">
