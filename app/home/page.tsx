@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dynamic from "next/dynamic";
 import "react-multi-carousel/lib/styles.css";
+import Link from "next/link";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 const BookingBar = dynamic(() => import("../_components/layout/BookingBar"), {
   ssr: false,
@@ -54,7 +55,7 @@ const Page = () => {
       <div className=" bg-black/10 h-[calc(100vh-80px)] w-full relative ">
         <div className=" p-4 lg:grid grid-cols-2 max-w-6xl  mx-auto h-full ">
           <div className=" sm:absolute inset-0 sm:bg-black/20 lg:bg-transparent lg:static flex flex-col justify-center lg:items-start items-center gap-4 h-full lg:h-11/12  z-12">
-            <h2 className="font-pacifico text-5xl italic font-semibold">
+            <h2 className="font-pacifico sm:text-start text-center text-5xl italic font-semibold">
               Comfort Hotel
             </h2>
             <h3 className="font-courgette text-4xl italic font-medium text-amber-600 text-center sm:text-start">
@@ -64,17 +65,23 @@ const Page = () => {
               Every moment feels like the first time in paradise view
             </p>
             <div className=" flex item-center mt-8 gap-4  justify-between max-w-xs">
-              <button className=" w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium">
+              <Link
+                href={"booking"}
+                className=" w-fit h-10 rounded-lg bg-slate-800 px-8 py-2 text-gray-200 text-sm font-medium"
+              >
                 Book now
-              </button>
+              </Link>
 
-              <button className="play flex gap-2 sm:text-gray-200 lg:text-slate-700 font-semibold items-center">
+              <Link
+                href={"/explore"}
+                className="play flex gap-2 sm:text-gray-200 lg:text-slate-700 font-semibold items-center"
+              >
                 <FontAwesomeIcon
                   icon={faCirclePlay}
                   className="size-12 text-4xl  text-green-700 "
                 />{" "}
                 Take a tour
-              </button>
+              </Link>
             </div>
           </div>
           <div className="hidden sm:block lg:static sm:absolute inset-0 sm:z-1 -z-1">
@@ -87,8 +94,8 @@ const Page = () => {
             />
           </div>
         </div>
-      
-        <div className=" hidden sm:absolute bottom-8 left-0 right-0 z-10 h-20 max-w-7xl mx-auto  px-3 rounded-2xl sm:flex ">
+
+        <div className=" hidden sm:absolute bottom-8 left-0 right-0 z-20 xl:z-10 xl:h-20  max-w-7xl mx-auto  px-0 xl:px-3 rounded-2xl sm:flex ">
           <BookingBar />
         </div>
       </div>
@@ -123,10 +130,10 @@ const Page = () => {
             All rooms are designed for comfort.
           </p>
 
-          <div className=" flex-wrap sm:flex-nowrap flex max-w-5xl mx-auto gap-4 justify-center py-4">
+          <div className=" flex-wrap sm:flex-nowrap flex sm:flex-row flex-col max-w-5xl mx-auto gap-4 justify-center py-4">
             {roomStandards.map((item, i) => (
               <div
-                className="flex-1 rounded-lg  px-4 pt-4 pb-2 bg-white overflow-hidden min-w-70"
+                className="flex-1 rounded-lg  px-4 pt-4 pb-2 bg-white overflow-hidden lg:min-w-70"
                 key={i}
               >
                 <div className="relative">

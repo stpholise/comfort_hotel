@@ -8,16 +8,16 @@ const page = () => {
         text="The elegant luxury bedrooms in this gallery showcase custom interior designs & decorating ideas. View pictures and find your perfect luxury bedroom design."
       />
 
-      <div className=" pt-18 pb-12">
-        <div className="flex justify-between px-4 xl:gap-22  w-full  max-w-6xl mx-auto">
+      <div className=" pt-18 pb-12 px-4">
+        <div className="flex items-center sm:items-start sm:flex-row flex-col justify-between sm:pl-4 gap-8 xl:gap-22  w-full  max-w-6xl mx-auto">
           <div className="">
-            <div className="h-110 w-90 bg-amber-950 relative mb-8">
+            <div className="h-80 w-70 sm:h-110 sm:w-90 bg-amber-950 relative mb-8">
               <Image
                 src={'/bg_images/img1.jpeg'}
                 alt="ceo image"
                 width={300} 
                 height={400} 
-                className=" h-110 w-90 object-cover  absolute -left-4 -bottom-4"
+                className=" h-80 w-70 sm:h-110 sm:w-90 object-cover  absolute -left-2 -bottom-2  sm:-left-4 sm:-bottom-4"
                />
             </div>
 

@@ -1,16 +1,27 @@
 "use client";
 
 import {
-  faLocation,
+  // faLocation,
   faCalendar,
-  faUser,
+  // faUser,
   faBed,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
+// import { useParams } from "next/navigation";
+import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
 
-export default function BookingBar() {
+export default function BookingBar({
+  // setCheckIn,
+  // setCheckOut,
+  setNights,
+}: {
+  // setCheckIn: Dispatch<SetStateAction<string | null>>;
+  // setCheckOut: Dispatch<SetStateAction<string | null>>;
+  setNights: Dispatch<SetStateAction<number>>;
+}) {
   const [form, setForm] = useState({
     location: "",
     roomType: "",
@@ -22,61 +33,82 @@ export default function BookingBar() {
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>,
   ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    const updatedForm = {
+      ...form,
+      [name]: value,
+    };
+
+    setForm(updatedForm);
+
+    setNights(calculateNights(updatedForm.checkIn, updatedForm.checkOut));
   };
 
-  const handleSubmit = async () => {
-    console.log('testing button')
-    try {
-      const res = await fetch("/api/availability", {
-        method: "POST",
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) {
-        throw new Error("Error booking room");
-      }
-      const data = await res.json();
-      console.log(data);
-      toast.success(data.messge);
-    } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
-      }
-    }
+  const handleLink = {
+    pathname: "/booking",
+    query: {
+      checkIn: form.checkIn,
+      chekcout: form.checkOut,
+    },
+  };
+  const calculateNights = (checkIn: string | null, checkOut: string | null) => {
+    if (!checkIn || !checkOut) return 0;
 
-    // 👉 show available rooms to user
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+
+    const difference = end.getTime() - start.getTime();
+    console.log(difference);
+
+    return Math.ceil(difference / (1000 * 60 * 60 * 24));
   };
 
   return (
-    <div className="w-full bg-white/90 backdrop-blur-md shadow-xl  rounded-2xl p-4 md:p-5 flex items-center gap-8">
+    <div className="w-full hidden bg-white/80 backdrop-blur-md shadow-xl  rounded-2xl p-4 md:p-5 sm:flex items-center gap-8">
       <div className="flex flex-row h-fit bg-white p-4 lg:p-0 flex-wrap lg:flex-nowrap md:flex-row gap-4 items-center  flex-8 ">
-        
-        <div className=" flex  gap-2 flex-1 ">
-          <FontAwesomeIcon icon={faLocation} className="py-1 text-xl  lg:hidden sm:flex flex" />
+        {/* <div className=" flex  gap-2 flex-1 ">
+          <FontAwesomeIcon
+            icon={faLocation}
+            className="py-1 text-xl  lg:hidden sm:flex flex"
+          />
           <div className="flex flex-col w-full ">
-            <label className="text-sm text-gray-500 ">Location</label>
+            <label
+              htmlFor="location"
+              className="cursor-pointer text-sm text-gray-500 "
+            >
+              Location
+            </label>
 
             <select
               name="location"
+              id="location"
               onChange={handleChange}
-              className=" rounded-xl  w-20 text-sm font-medium  h-7   focus:outline-none"
+              className="w-fit cursor-pointer  text-sm font-medium h-7 focus:outline-none bg-transparent"
             >
               <option value="abuja">Abuja</option>
               <option value="lagos">Lagos</option>
               <option value="kano">Kano</option>
             </select>
           </div>
-        </div>
+        </div> */}
 
-        {/* 🛏 Room Type */}
-        <div className=" flex  gap-2 flex-1 ">
-          <FontAwesomeIcon icon={faBed} className="py-1 text-xl  md:hidden sm:block block" />
-          <div className="flex flex-col w-full flex-1">
-            <label className="text-sm text-gray-500">Room Type</label>
+        <div className="flex gap-2 flex-1">
+          <FontAwesomeIcon
+            icon={faBed}
+            className="py-1 text-xl md:hidden sm:block"
+          />
+
+          <div className="flex flex-col w-full">
+            <label htmlFor="roomType" className="text-sm text-gray-500">
+              Room Type
+            </label>
+
             <select
+              id="roomType"
               name="roomType"
               onChange={handleChange}
-              className="  max-w-20   text-sm font-medium  h-7   focus:outline-none"
+              className="w-fit cursor-pointer  text-sm font-medium h-7 focus:outline-none bg-transparent"
             >
               <option value="1">Single</option>
               <option value="2">Double</option>
@@ -84,36 +116,54 @@ export default function BookingBar() {
             </select>
           </div>
         </div>
-
-        {/* 👥 Guests */}
+        {/* 
         <div className=" flex  gap-2 flex-1 ">
-          <FontAwesomeIcon icon={faUser} className="py-1 text-xl  md:hidden sm:block block" />
+          <FontAwesomeIcon
+            icon={faUser}
+            className="py-1 text-xl  md:hidden sm:block block"
+          />
           <div className="flex flex-col w-full flex-1">
             <label className="text-sm text-gray-500">Guests</label>
             <select
               name="guests"
               onChange={handleChange}
-              className="  max-w-20   text-sm font-medium  h-7   focus:outline-none"
+              className="cursor-pointer  max-w-20   text-sm font-medium  h-7   focus:outline-none"
             >
               {[1, 2, 3, 4, 5].map((num) => (
                 <option key={num} value={num}>
-                  {num} {num === 1 ? "Person" : "People"}
+                  {num}{" "}
                 </option>
               ))}
             </select>
           </div>
-        </div>
+        </div> */}
 
-        {/* 📅 Check-in */}
         <div className=" flex  gap-2 flex-1 ">
-          <FontAwesomeIcon icon={faCalendar} className="py-1 text-xl  md:hidden sm:block block" />
-          <div className="flex flex-col w-full flex-1">
-            <label className="text-sm text-gray-500">Check-in</label>
+          <FontAwesomeIcon
+            icon={faCalendar}
+            className="py-1 text-xl  md:hidden sm:block block"
+          />
+          <div
+            className="flex flex-col w-full flex-1 cursor-pointer"
+            onClick={(e) => {
+              const input = e.currentTarget.querySelector(
+                'input[type="date"]',
+              ) as HTMLInputElement | null;
+              if (input && typeof input.showPicker === "function") {
+                input.showPicker();
+              }
+            }}
+          >
+            <label className="text-sm text-gray-500 cursor-pointer">
+              Check-in
+            </label>
             <input
               type="date"
               name="checkIn"
+              value={form.checkIn}
               onChange={handleChange}
-              className="  max-w-30   text-sm font-medium  h-7   focus:outline-none"
+              min={new Date().toISOString().split("T")[0]}
+              className="cursor-pointer text-sm font-medium px-2 py-1 border rounded-md w-30 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
@@ -122,7 +172,17 @@ export default function BookingBar() {
         <div className=" flex  gap-2 flex-1 ">
           <FontAwesomeIcon icon={faCalendar} className="py-1 text-xl" />
 
-          <div className="flex flex-col w-full flex-1">
+          <div
+            className="flex flex-col w-full flex-1"
+            onClick={(e) => {
+              const input = e.currentTarget.querySelector(
+                'input[type="date"]',
+              ) as HTMLInputElement | null;
+              if (input && typeof input.showPicker === "function") {
+                input.showPicker();
+              }
+            }}
+          >
             <label htmlFor="checkout" className="text-sm text-gray-500">
               Check-out
             </label>
@@ -130,8 +190,10 @@ export default function BookingBar() {
               id="checkout"
               type="date"
               name="checkOut"
+              value={form.checkOut}
               onChange={handleChange}
-              className="  max-w-30   text-sm font-medium  h-7   focus:outline-none"
+              min={form.checkIn || new Date().toISOString().split("T")[0]}
+              className="cursor-pointer w-30 text-sm font-medium h-7 focus:outline-none"
             />
           </div>
         </div>
@@ -139,12 +201,12 @@ export default function BookingBar() {
         {/* 🔍 Button */}
       </div>
       <div className="w-full md:w-auto  flex-1">
-        <button
-          onClick={handleSubmit}
+        <Link
+          href={handleLink}
           className="w-full md:w-auto px-6 py-2 h-10 bg-slate-600 text-white rounded-xl hover:bg-blue-700 transition text-sm funt-medium whitespace-nowrap"
         >
           Book Now
-        </button>
+        </Link>
       </div>
     </div>
   );
