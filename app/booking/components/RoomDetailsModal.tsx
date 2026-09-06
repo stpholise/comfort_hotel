@@ -7,7 +7,7 @@ import {
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { Dispatch, SetStateAction } from "react";
-import { Room } from "../page";
+import { Room } from "../BookingPage";
 import Image from "next/image";
 import { useState } from "react";
 import clsx from "clsx";
