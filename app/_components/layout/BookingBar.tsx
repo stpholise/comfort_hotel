@@ -1,67 +1,44 @@
 "use client";
 
-import {
-  // faLocation,
-  faCalendar,
-  // faUser,
-  faBed,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faBed } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-// import toast from "react-hot-toast";
-// import { useParams } from "next/navigation";
-import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function BookingBar({
-  // setCheckIn,
-  // setCheckOut,
-  setNights,
-}: {
-  // setCheckIn: Dispatch<SetStateAction<string | null>>;
-  // setCheckOut: Dispatch<SetStateAction<string | null>>;
-  setNights: Dispatch<SetStateAction<number>>;
-}) {
+export default function BookingBar() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [form, setForm] = useState({
     location: "",
     roomType: "",
     guests: 1,
-    checkIn: "",
-    checkOut: "",
+    checkIn: searchParams.get("checkIn") ?? "",
+    checkOut: searchParams.get("checkOut") ?? "",
   });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>,
   ) => {
     const { name, value } = e.target;
-
-    const updatedForm = {
-      ...form,
+    setForm((currentForm) => ({
+      ...currentForm,
       [name]: value,
-    };
-
-    setForm(updatedForm);
-
-    setNights(calculateNights(updatedForm.checkIn, updatedForm.checkOut));
+    }));
   };
 
-  const handleLink = {
-    pathname: "/booking",
-    query: {
-      checkIn: form.checkIn,
-      chekcout: form.checkOut,
-    },
-  };
-  const calculateNights = (checkIn: string | null, checkOut: string | null) => {
-    if (!checkIn || !checkOut) return 0;
+  const handleViewRate = () => {
+    const params = new URLSearchParams();
 
-    const start = new Date(checkIn);
-    const end = new Date(checkOut);
+    if (form.checkIn) {
+      params.set("checkIn", form.checkIn);
+    }
 
-    const difference = end.getTime() - start.getTime();
-    console.log(difference);
+    if (form.checkOut) {
+      params.set("checkOut", form.checkOut);
+    }
 
-    return Math.ceil(difference / (1000 * 60 * 60 * 24));
+    router.push(`/booking?${params.toString()}`);
   };
 
   return (
@@ -160,7 +137,7 @@ export default function BookingBar({
             <input
               type="date"
               name="checkIn"
-              value={form.checkIn}
+              value={ form.checkIn}
               onChange={handleChange}
               min={new Date().toISOString().split("T")[0]}
               className="cursor-pointer text-sm font-medium px-2 py-1 border rounded-md w-30 border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -201,12 +178,12 @@ export default function BookingBar({
         {/* 🔍 Button */}
       </div>
       <div className="w-full md:w-auto  flex-1">
-        <Link
-          href={handleLink}
+        <button
+          onClick={handleViewRate}
           className="w-full md:w-auto px-6 py-2 h-10 bg-slate-600 text-white rounded-xl hover:bg-blue-700 transition text-sm funt-medium whitespace-nowrap"
         >
-          Book Now
-        </Link>
+          view Rate
+        </button>
       </div>
     </div>
   );
